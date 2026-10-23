@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>برقِ روشن — با یک کلید، خانه روشن</title>
+<meta name="description" content="نصب و نوسازی تابلوی برق، سیم‌کشی، شارژر خودروی برقی، عیب‌یابی و بازرسی ایمنی — خدمات برق در شهر و اطراف.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" id="brandName"></a>
+    <a class="phone" href="#" id="brandPhone"></a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- خانه و کلید -->
+  <section class="hero" id="hero">
+    <div class="hero-copy">
+      <h1>خانه‌تان را با یک کلید روشن می‌کنیم.</h1>
+      <p class="lead">از تابلوی برق تا آخرین لامپ؛ جریان را مو به مو تا هر اتاق می‌رسانیم — مثل همین نقشه. روی هر اتاق بایستید تا مدارهایش را ببینید.</p>
+      <div class="switch-block">
+        <button class="switch" id="masterSwitch" aria-pressed="false" aria-label="کلید اصلی روشنایی خانه">
+          <span class="rocker"></span>
+          <span class="switch-label">خاموش</span>
+        </button>
+        <span class="switch-hint" id="switchHint">کلید را بزن</span>
+      </div>
+    </div>
+    <div class="hero-scene">
+      <svg id="heroHouse" viewBox="0 0 900 560" aria-label="نقشه‌ی برق یک خانه‌ی دوطبقه در شب">
+        <defs>
+          <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0a0d14"/>
+            <stop offset="1" stop-color="#11161f"/>
+          </linearGradient>
+          <radialGradient id="roomGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="rgba(245,185,66,0.6)"/>
+            <stop offset="0.6" stop-color="rgba(245,185,66,0.14)"/>
+            <stop offset="1" stop-color="rgba(245,185,66,0)"/>
+          </radialGradient>
+        </defs>
+        <rect class="sky" width="900" height="560"/>
+        <circle class="star" cx="90" cy="70" r="2"/>
+        <circle class="star" cx="220" cy="40" r="1.5"/>
+        <circle class="star" cx="640" cy="55" r="2"/>
+        <circle class="star" cx="820" cy="120" r="1.5"/>
+        <circle class="star" cx="760" cy="35" r="1.2"/>
+        <circle class="star" cx="150" cy="140" r="1.2"/>
+        <rect class="ground" y="500" width="900" height="60"/>
+        <path class="roof" d="M130,192 L450,88 L770,192"/>
+        <rect class="shell" x="160" y="192" width="580" height="308"/>
+        <line class="floor-line" x1="160" y1="330" x2="740" y2="330"/>
+        <line class="wall-line" x1="400" y1="330" x2="400" y2="500"/>
+        <line class="wall-line" x1="540" y1="330" x2="540" y2="500"/>
+        <line class="wall-line" x1="640" y1="330" x2="640" y2="500"/>
+        <line class="wall-line" x1="390" y1="192" x2="390" y2="330"/>
+        <line class="wall-line" x1="560" y1="192" x2="560" y2="330"/>
+        <g id="cables"></g>
+        <g transform="translate(585,372)" aria-label="تابلوی برق">
+          <rect class="board-box" width="30" height="46" rx="2"/>
+          <line class="board-door" x1="15" y1="0" x2="15" y2="46"/>
+        </g>
+        <g class="room" data-room="living">
+          <rect class="room-glow" x="160" y="330" width="240" height="170"/>
+          <circle class="bulb" cx="280" cy="424" r="9"/>
+        </g>
+        <g class="room" data-room="kitchen">
+          <rect class="room-glow" x="400" y="330" width="140" height="170"/>
+          <circle class="bulb" cx="470" cy="424" r="9"/>
+        </g>
+        <g class="room" data-room="hall">
+          <rect class="room-glow" x="540" y="330" width="100" height="170"/>
+          <circle class="bulb" cx="590" cy="452" r="9"/>
+        </g>
+        <g class="room" data-room="stairs">
+          <rect class="room-glow" x="640" y="330" width="100" height="170"/>
+          <circle class="bulb" cx="690" cy="434" r="9"/>
+        </g>
+        <g class="room" data-room="bed1">
+          <rect class="room-glow" x="160" y="192" width="230" height="138"/>
+          <circle class="bulb" cx="275" cy="258" r="9"/>
+        </g>
+        <g class="room" data-room="bed2">
+          <rect class="room-glow" x="390" y="192" width="170" height="138"/>
+          <circle class="bulb" cx="475" cy="258" r="9"/>
+        </g>
+        <g class="room" data-room="bath">
+          <rect class="room-glow" x="560" y="192" width="180" height="138"/>
+          <circle class="bulb" cx="650" cy="258" r="9"/>
+        </g>
+      </svg>
+      <div class="room-tip" id="roomTip" hidden></div>
+    </div>
+  </section>
+
+  <!-- خدمات -->
+  <section id="services">
+    <h2>چه کارهایی انجام می‌دهیم</h2>
+    <div class="services-grid" id="servicesList"></div>
+  </section>
+
+  <!-- تابلوی برق -->
+  <section id="board">
+    <h2>مدارها را خودتان وصل و قطع کنید</h2>
+    <p class="board-status" id="boardStatus"></p>
+    <div class="board-grid">
+      <svg id="boardSvg" viewBox="0 0 240 330" aria-label="تابلوی برق با ده کلید">
+        <rect class="enclosure" x="6" y="6" width="228" height="318" rx="10"/>
+        <line class="din-rail" x1="16" y1="32" x2="224" y2="32"/>
+        <line class="din-rail" x1="16" y1="308" x2="224" y2="308"/>
+        <g id="breakerBank"></g>
+      </svg>
+      <svg id="miniHouse" viewBox="0 0 420 260" aria-label="خانه‌ی کوچک: با قطع هر کلید، اتاق‌های همان مدار تاریک می‌شوند">
+        <g class="mini-room" data-room="bed">
+          <rect class="mr-rect" x="10" y="20" width="190" height="110"/>
+          <circle class="mr-bulb" cx="105" cy="60" r="7"/>
+          <text class="mr-label" x="105" y="115">اتاق‌خواب</text>
+        </g>
+        <g class="mini-room" data-room="bath">
+          <rect class="mr-rect" x="200" y="20" width="100" height="110"/>
+          <circle class="mr-bulb" cx="250" cy="60" r="7"/>
+          <text class="mr-label" x="250" y="115">حمام</text>
+        </g>
+        <g class="mini-room" data-room="yard">
+          <rect class="mr-rect" x="300" y="20" width="110" height="110"/>
+          <circle class="mr-bulb" cx="355" cy="60" r="7"/>
+          <text class="mr-label" x="355" y="115">حیاط</text>
+        </g>
+        <g class="mini-room" data-room="living">
+          <rect class="mr-rect" x="10" y="130" width="190" height="110"/>
+          <circle class="mr-bulb" cx="105" cy="170" r="7"/>
+          <text class="mr-label" x="105" y="225">پذیرایی</text>
+        </g>
+        <g class="mini-room" data-room="kitchen">
+          <rect class="mr-rect" x="200" y="130" width="100" height="110"/>
+          <circle class="mr-bulb" cx="250" cy="170" r="7"/>
+          <text class="mr-label" x="250" y="225">آشپزخانه</text>
+        </g>
+        <g class="mini-room" data-room="hall">
+          <rect class="mr-rect" x="300" y="130" width="110" height="110"/>
+          <circle class="mr-bulb" cx="355" cy="170" r="7"/>
+          <text class="mr-label" x="355" y="225">راه‌رو</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- دیوار و مراحل کار -->
+  <section id="wall">
+    <h2>از دیوار خالی تا پریز آماده</h2>
+    <div class="wall-grid">
+      <div class="wall-scene">
+        <svg id="wallSvg" viewBox="0 0 360 250" aria-label="دیواری که مرحله‌به‌مرحله از حالت خشن تا پریز نصب‌شده پیش می‌رود">
+          <g class="wall-stage show" data-stage="1">
+            <rect class="w-plaster" x="10" y="10" width="340" height="230" rx="4"/>
+            <path class="w-mark" d="M40,60 H270 V150"/>
+          </g>
+          <g class="wall-stage" data-stage="2">
+            <rect class="w-plaster" x="10" y="10" width="340" height="230" rx="4"/>
+            <rect class="w-groove" x="30" y="142" width="226" height="16"/>
+            <rect class="w-groove" x="262" y="30" width="16" height="100"/>
+          </g>
+          <g class="wall-stage" data-stage="3">
+            <rect class="w-plaster" x="10" y="10" width="340" height="230" rx="4"/>
+            <rect class="w-groove" x="30" y="142" width="226" height="16"/>
+            <rect class="w-groove" x="262" y="30" width="16" height="100"/>
+            <rect class="w-conduit" x="33" y="147" width="8" height="6"/>
+            <rect class="w-conduit" x="60" y="147" width="150" height="6"/>
+            <rect class="w-conduit" x="222" y="147" width="31" height="6"/>
+            <rect class="w-conduit" x="265" y="33" width="6" height="94"/>
+            <rect class="w-box" x="250" y="120" width="40" height="60" rx="3"/>
+          </g>
+          <g class="wall-stage" data-stage="4">
+            <rect class="w-paint" x="10" y="10" width="340" height="230" rx="4"/>
+            <rect class="w-plate" x="256" y="130" width="28" height="44" rx="3"/>
+            <circle class="w-hole" cx="270" cy="141" r="3.5"/>
+            <circle class="w-hole" cx="270" cy="163" r="3.5"/>
+            <circle class="w-hole" cx="270" cy="152" r="2.2"/>
+          </g>
+        </svg>
+        <div class="tester-row">
+          <svg id="testerSvg" viewBox="0 0 150 96" aria-label="دستگاه تست">
+            <rect class="t-body" x="10" y="6" width="130" height="84" rx="10"/>
+            <rect class="t-screen" x="24" y="16" width="102" height="34" rx="3"/>
+            <text id="testerScreen" x="75" y="37">آماده</text>
+            <circle class="t-btn" cx="38" cy="68" r="7"/>
+            <circle class="t-btn" cx="60" cy="68" r="7"/>
+            <path class="t-probe" d="M96,68 H120"/>
+          </svg>
+        </div>
+      </div>
+      <div id="stepsList"></div>
+    </div>
+  </section>
+
+  <!-- ون و شهرها -->
+  <section id="areas">
+    <h2>در مسیر شما هستیم</h2>
+    <p class="board-status">ون ما هر روز از کنار این‌ها می‌گذرد.</p>
+    <div class="van-strip" id="vanStrip">
+      <svg id="van" class="van" viewBox="0 0 170 96" aria-label="ون خدمات">
+        <path class="van-body" d="M10,64 L10,38 Q10,30 20,30 L62,30 L86,15 Q89,12 94,12 L110,12 Q120,12 122,21 L126,30 L142,36 Q152,39 152,48 L152,64 Z"/>
+        <path class="van-window" d="M64,28 L84,15 L108,15 L108,28 Z"/>
+        <rect class="van-panel" x="18" y="38" width="46" height="22" rx="2"/>
+        <text id="vanName" x="41" y="53"></text>
+        <circle class="van-lamp" cx="14" cy="44" r="3.5"/>
+        <circle class="van-wheel" cx="42" cy="66" r="10"/>
+        <circle class="van-wheel" cx="128" cy="66" r="10"/>
+      </svg>
+      <div class="towns" id="towns"></div>
+      <div class="road"></div>
+    </div>
+  </section>
+
+  <!-- ثبت، بیمه و نظرات -->
+  <section id="trust">
+    <h2>ثبت‌شده، بیمه‌شده و روی رکورد</h2>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <h3>ثبت و پروانه</h3>
+        <p class="slot">شماره‌ی پروانه‌ی کسب‌وکار و نشان صلاحیت فنی خود را اینجا بگذارید — و چیزی که نتوانید نشان دهید، ننویسید.</p>
+      </div>
+      <div class="trust-card">
+        <h3>بیمه</h3>
+        <p class="slot">نوع و سقف پوشش بیمه‌ی مسئولیت مدنی کارتان را اینجا بنویسید.</p>
+      </div>
+      <div class="trust-card">
+        <h3>حرف مشتری‌ها</h3>
+        <p class="slot">نقل‌قول واقعی مشتریان‌تان را با نام و محله‌شان اینجا بگذارید.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- فرم درخواست -->
+  <section id="request">
+    <h2>درخواست کار بدهید</h2>
+    <form id="requestForm" class="request-form">
+      <div class="field">
+        <label for="fName">نام و نام خانوادگی</label>
+        <input id="fName" name="name" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="fPhone">شماره تماس</label>
+        <input id="fPhone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="۰۹۱۲ ـ ـ ـ ـ ـ ـ ـ">
+      </div>
+      <div class="field">
+        <label for="fMsg">کارتان چیست؟</label>
+        <textarea id="fMsg" name="message" rows="4" required></textarea>
+      </div>
+      <div class="send-row">
+        <button type="submit" class="switch" id="sendSwitch" aria-pressed="false" aria-label="ارسال درخواست">
+          <span class="rocker"></span>
+          <span class="switch-label">ارسال</span>
+        </button>
+        <p class="form-note" id="formNote"></p>
+      </div>
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap end-grid">
+    <svg id="endHouse" class="end-house" viewBox="0 0 320 190" aria-label="خانه در پایان صفحه: همه چراغ‌ها خاموش می‌شوند جز چراغ راه‌رو">
+      <path class="e-roof" d="M20,26 L160,2 L300,26"/>
+      <g class="e-room">
+        <rect x="30" y="26" width="130" height="70"/>
+        <circle class="ebulb" cx="95" cy="60" r="7"/>
+      </g>
+      <g class="e-room">
+        <rect x="160" y="26" width="130" height="70"/>
+        <circle class="ebulb" cx="225" cy="60" r="7"/>
+      </g>
+      <g class="e-room">
+        <rect x="30" y="96" width="140" height="70"/>
+        <circle class="ebulb" cx="100" cy="128" r="7"/>
+      </g>
+      <g class="e-room">
+        <rect x="170" y="96" width="70" height="70"/>
+        <circle class="ebulb" cx="205" cy="128" r="7"/>
+      </g>
+      <g class="e-room">
+        <rect x="240" y="96" width="50" height="70"/>
+        <circle class="ebulb hall" cx="265" cy="128" r="7"/>
+      </g>
+    </svg>
+    <div>
+      <p class="end-copy"><strong id="footName"></strong> — خدمات برق در <span id="footArea"></span>.</p>
+      <p class="end-copy"><a id="footPhone" href="#"></a> · <span id="footEmail"></span></p>
+      <p class="end-copy dim">© ۱۴۰۵ — صفحه با خاموش‌شدن خانه تمام می‌شود؛ فقط چراغ راه‌رو روشن می‌ماند.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/geometry.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>

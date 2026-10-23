@@ -1,0 +1,207 @@
+/* Earthed — پوسته‌ی صفحه. رنگ‌ها و قلم‌ها فقط از توکن‌های همین فایل. */
+
+:root {
+  --bg: #0c0f16;
+  --bg-2: #12161f;
+  --panel: #161b26;
+  --ink: #f2ead9;
+  --ink-dim: #a9a290;
+  --amber: #f5b942;
+  --amber-deep: #c96f2f;
+  --amber-soft: rgba(245, 185, 66, 0.14);
+  --line: #2a3040;
+  --good: #7ec27a;
+  --bad: #e05d5d;
+  --font: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.9;
+}
+
+.wrap { max-width: 1100px; margin-inline: auto; padding-inline: 20px; }
+a { color: var(--amber); text-decoration: none; }
+h1, h2, h3 { line-height: 1.45; font-weight: 700; margin: 0; }
+h2 { font-size: 1.7rem; margin-block-end: 0.6rem; }
+p { margin-block: 0.4rem 1rem; }
+section { padding-block: 64px; border-top: 1px solid var(--line); }
+
+/* ---------- سرصفحه ---------- */
+.top { border-block-end: 1px solid var(--line); background: var(--bg-2); position: sticky; top: 0; z-index: 5; }
+.top .wrap { display: flex; justify-content: space-between; align-items: center; padding-block: 14px; }
+.brand { font-weight: 700; font-size: 1.15rem; color: var(--ink); }
+.brand::before { content: ""; display: inline-block; inline-size: 10px; block-size: 10px; border-radius: 50%; background: var(--amber); margin-inline-end: 10px; box-shadow: 0 0 8px var(--amber); }
+.phone { font-weight: 500; direction: ltr; }
+
+/* ---------- بخش اول: خانه و کلید ---------- */
+.hero { display: grid; grid-template-columns: 1fr 1.25fr; gap: 36px; align-items: center; padding-block: 56px; border-top: 0; }
+.hero h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); }
+.hero .lead { color: var(--ink-dim); font-size: 1.05rem; }
+.hero-scene { position: relative; }
+#heroHouse { width: 100%; height: auto; display: block; }
+
+.switch {
+  appearance: none; border: 1px solid var(--line); cursor: pointer;
+  width: 66px; padding: 6px 6px 4px; border-radius: 12px;
+  background: var(--panel); display: inline-flex; flex-direction: column;
+  align-items: center; gap: 6px; font-family: inherit; perspective: 260px;
+}
+.switch .rocker {
+  inline-size: 100%; block-size: 58px; border-radius: 8px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  transform-origin: 50% 100%;
+  transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+.switch .switch-label { font-size: 0.75rem; color: var(--ink-dim); }
+.switch.on .rocker { transform: rotateX(26deg); background: var(--amber-soft); box-shadow: inset 0 0 18px rgba(245, 185, 66, 0.35), 0 0 20px rgba(245, 185, 66, 0.25); }
+.switch.on .switch-label { color: var(--amber); }
+.switch:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+.switch-block { display: flex; align-items: center; gap: 18px; margin-block-start: 1.6rem; }
+.switch-hint { color: var(--ink-dim); font-size: 0.9rem; }
+
+/* نقشه‌ی خانه */
+.sky { fill: url(#skyGrad); }
+.star { fill: #3a4256; }
+.ground { fill: #080b10; }
+.shell { fill: #10141d; stroke: #39404f; stroke-width: 3; }
+.roof { fill: none; stroke: #39404f; stroke-width: 4; stroke-linecap: round; }
+.wall-line, .floor-line { stroke: #39404f; stroke-width: 3; }
+.board-box { fill: #1a1f2b; stroke: #4a5263; stroke-width: 1.5; }
+.board-door { stroke: #4a5263; stroke-width: 1.5; }
+.cable { fill: none; stroke: var(--amber); stroke-width: 2.5; stroke-linecap: round; opacity: 0.9; }
+.room { cursor: pointer; }
+.room-glow { fill: url(#roomGlow); opacity: 0; transition: opacity 0.6s ease; }
+.room.lit .room-glow { opacity: 0.55; }
+.bulb { fill: #565b67; transition: fill 0.45s ease; }
+.room.lit .bulb { fill: var(--amber); filter: drop-shadow(0 0 7px rgba(245, 185, 66, 0.95)); }
+
+.room-tip {
+  position: absolute; z-index: 3; pointer-events: none;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 14px; max-inline-size: 230px; font-size: 0.85rem; line-height: 1.7;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+}
+.room-tip strong { color: var(--amber); display: block; }
+.room-tip ul { margin: 0.25rem 0 0; padding-inline-start: 1.1rem; color: var(--ink-dim); }
+
+/* ---------- خدمات ---------- */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-block-start: 1.4rem; }
+.service { display: flex; gap: 16px; align-items: flex-start; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.service svg { inline-size: 54px; block-size: 54px; flex: none; color: var(--amber); }
+.service h3 { font-size: 1.05rem; margin-block-end: 0.25rem; }
+.service p { margin: 0; color: var(--ink-dim); font-size: 0.92rem; }
+
+/* ---------- تابلوی برق ---------- */
+.board-grid { display: grid; grid-template-columns: minmax(250px, 360px) 1fr; gap: 36px; align-items: start; margin-block-start: 1.4rem; }
+.enclosure { fill: var(--bg-2); stroke: var(--line); stroke-width: 2; }
+.din-rail { stroke: var(--line); stroke-width: 3; }
+.breaker { cursor: pointer; }
+.breaker .body { fill: var(--panel); stroke: #3a4150; stroke-width: 1.5; }
+.breaker .lever { fill: var(--amber); transition: transform 0.15s ease, fill 0.15s ease; }
+.breaker.off .lever { transform: translateY(17px); fill: var(--bad); }
+.breaker.off .body { stroke: var(--bad); }
+.breaker text { fill: var(--ink-dim); font-size: 11px; font-family: var(--font); }
+.breaker:focus { outline: none; }
+.breaker:focus .body { stroke: var(--amber); }
+.board-status { min-height: 3.2em; color: var(--ink-dim); }
+.mini-room .mr-rect { fill: #141926; stroke: #39404f; stroke-width: 2; }
+.mini-room .mr-bulb { fill: var(--amber); transition: fill 0.35s ease; }
+.mini-room .mr-label { fill: var(--ink-dim); font-size: 11.5px; font-family: var(--font); text-anchor: middle; }
+.mini-room.dark .mr-rect { fill: #0a0d13; }
+.mini-room.dark .mr-bulb { fill: #3a4256; }
+#miniHouse { width: 100%; height: auto; }
+
+/* ---------- دیوار و مراحل کار ---------- */
+.wall-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-block-start: 1.4rem; align-items: start; }
+.wall-scene { position: sticky; top: 90px; }
+#wallSvg { width: 100%; height: auto; display: block; }
+.wall-stage { opacity: 0; transition: opacity 0.7s ease; }
+.wall-stage.show { opacity: 1; }
+.w-plaster { fill: #d9cfba; stroke: #b3a78c; stroke-width: 2; }
+.w-mark { fill: none; stroke: #a99b7e; stroke-width: 2; stroke-dasharray: 6 6; }
+.w-groove { fill: #6b5c48; }
+.w-conduit { fill: #8a93a6; }
+.w-box { fill: #d9d4c8; stroke: #6b5c48; stroke-width: 2; }
+.w-paint { fill: #b9c6d6; stroke: #8fa0b6; stroke-width: 2; }
+.w-plate { fill: #f4f1ea; stroke: #b7b0a4; stroke-width: 2; }
+.w-hole { fill: #23262e; }
+.step { padding: 20px 4px; border-block-end: 1px dashed var(--line); }
+.step:last-child { border-block-end: 0; }
+.step h3 { font-size: 1.1rem; color: var(--ink-dim); transition: color 0.3s ease; }
+.step p { color: var(--ink-dim); font-size: 0.95rem; }
+.step .stage-tag { color: var(--amber-deep); font-size: 0.8rem; margin: 0; }
+.step.active h3 { color: var(--ink); }
+.tester-row { margin-block-start: 14px; display: flex; align-items: center; gap: 14px; }
+#testerSvg { inline-size: 150px; block-size: auto; flex: none; }
+.t-body { fill: var(--panel); stroke: var(--line); stroke-width: 2; }
+.t-screen { fill: #0d1218; stroke: #2f3646; stroke-width: 1.5; }
+.t-btn { fill: #232a38; stroke: #3a4150; stroke-width: 1.5; }
+#testerScreen { fill: var(--good); font-size: 11px; font-family: monospace, var(--font); text-anchor: middle; }
+.t-probe { stroke: var(--amber); stroke-width: 3; stroke-linecap: round; }
+
+/* ---------- ون و شهرها ---------- */
+.van-strip { position: relative; block-size: 150px; overflow: hidden; margin-block-start: 2rem; }
+.road { position: absolute; inset-inline: 0; block-end: 24px; border-block-end: 3px solid var(--line); }
+.towns { position: absolute; inset-inline: 0; block-end: 36px; display: flex; justify-content: space-between; padding-inline: 6px; color: var(--ink-dim); font-size: 0.9rem; }
+.towns span { white-space: nowrap; }
+.towns span::before { content: ""; display: inline-block; inline-size: 7px; block-size: 7px; border-radius: 50%; background: var(--amber-deep); margin-inline-end: 8px; vertical-align: middle; }
+.van { position: absolute; inset-inline-start: 4px; block-end: 22px; inline-size: 150px; will-change: transform; }
+.van-body { fill: var(--amber-deep); stroke: #1c2029; stroke-width: 2; }
+.van-window { fill: #0f141c; }
+.van-panel { fill: var(--ink); }
+#vanName { fill: #1c2029; font-size: 10.5px; font-family: var(--font); font-weight: 700; text-anchor: middle; }
+.van-wheel { fill: #14181f; stroke: #3a4150; stroke-width: 2; }
+.van-lamp { fill: var(--amber); }
+
+/* ---------- ثبت، بیمه و نظرات ---------- */
+.trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-block-start: 1.4rem; }
+.trust-card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+.trust-card h3 { color: var(--amber); font-size: 1.02rem; margin-block-end: 0.5rem; }
+.trust-card .slot { color: var(--ink-dim); font-size: 0.92rem; margin: 0; }
+
+/* ---------- فرم درخواست ---------- */
+.request-form { display: grid; gap: 16px; max-inline-size: 540px; margin-block-start: 1.4rem; }
+.field label { display: block; font-size: 0.88rem; color: var(--ink-dim); margin-block-end: 6px; }
+.field input, .field textarea {
+  inline-size: 100%; background: var(--bg-2); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 10px 14px; font-family: inherit; font-size: 1rem;
+}
+.field input:focus, .field textarea:focus { outline: 2px solid var(--amber); outline-offset: 1px; }
+.send-row { display: flex; align-items: center; gap: 18px; }
+.form-note { min-block-size: 3.4em; font-size: 0.9rem; color: var(--ink-dim); margin: 0; }
+.form-note.warn { color: var(--bad); }
+.form-note.ok { color: var(--good); }
+
+/* ---------- پایان صفحه: خانه تاریک ---------- */
+footer { border-top: 1px solid var(--line); padding-block: 56px 72px; }
+.end-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+#endHouse { width: 100%; height: auto; }
+.e-room rect { fill: #10141d; stroke: #39404f; stroke-width: 2; }
+.e-roof { fill: none; stroke: #39404f; stroke-width: 4; stroke-linecap: round; }
+.ebulb { fill: var(--amber); transition: fill 1.4s ease, filter 1.4s ease; }
+.end-house.night .ebulb { fill: #3a4256; filter: none; }
+.end-house.night .ebulb.hall { fill: var(--amber); filter: drop-shadow(0 0 8px rgba(245, 185, 66, 0.9)); }
+.end-copy { color: var(--ink-dim); }
+.end-copy.dim { font-size: 0.85rem; }
+#footPhone { direction: ltr; }
+
+/* ---------- واکنش‌گرایی ---------- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .board-grid, .wall-grid, .end-grid { grid-template-columns: 1fr; }
+  .wall-scene { position: static; }
+  .towns span:nth-child(4), .towns span:nth-child(5) { display: none; }
+}
+
+/* ---------- حرکت کمتر ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .switch .rocker, .room-glow, .bulb, .wall-stage, .breaker .lever, .ebulb { transition: none; }
+}
